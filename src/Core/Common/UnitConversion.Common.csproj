@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>UnitConversion.Common</AssemblyName>
+    <RootNamespace>UnitConversion.Common</RootNamespace>
+  </PropertyGroup>
+
+</Project>

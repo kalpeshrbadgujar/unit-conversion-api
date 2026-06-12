@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <AssemblyName>UnitConversion.Api</AssemblyName>
+    <RootNamespace>UnitConversion.Api</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Application\UnitConversion.Application.csproj" />
+    <ProjectReference Include="..\Infrastructure\UnitConversion.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

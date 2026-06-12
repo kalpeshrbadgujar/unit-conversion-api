@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>UnitConversion.Domain</AssemblyName>
+    <RootNamespace>UnitConversion.Domain</RootNamespace>
+  </PropertyGroup>
+
+</Project>
