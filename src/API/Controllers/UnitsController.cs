@@ -1,5 +1,5 @@
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using UnitConversion.Application.Abstractions;
 using UnitConversion.Application.Queries.GetUnits;
 using UnitConversion.Domain.Enums;
 using UnitConversion.Domain.Models;
@@ -10,11 +10,11 @@ namespace UnitConversion.Api.Controllers;
 [Route("api/units")]
 public sealed class UnitsController : ControllerBase
 {
-    private readonly IMediator _mediator;
+    private readonly IQueryHandler<GetUnitsQuery, IReadOnlyList<UnitDefinition>> _handler;
 
-    public UnitsController(IMediator mediator)
+    public UnitsController(IQueryHandler<GetUnitsQuery, IReadOnlyList<UnitDefinition>> handler)
     {
-        _mediator = mediator;
+        _handler = handler;
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ public sealed class UnitsController : ControllerBase
         [FromQuery] ConversionCategory? category,
         CancellationToken cancellationToken)
     {
-        var units = await _mediator.Send(new GetUnitsQuery(category), cancellationToken);
+        var units = await _handler.Handle(new GetUnitsQuery(category), cancellationToken);
         return Ok(units);
     }
 }

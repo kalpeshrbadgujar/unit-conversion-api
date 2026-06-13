@@ -1,12 +1,38 @@
-using MediatR;
+using UnitConversion.Application.Abstractions;
+using UnitConversion.Domain.Conversion;
+using UnitConversion.Domain.Exceptions;
 using UnitConversion.Domain.Models;
+using UnitConversion.Domain.Registry;
 
 namespace UnitConversion.Application.Commands.ConvertUnit;
 
-public sealed class ConvertUnitCommandHandler : IRequestHandler<ConvertUnitCommand, ConversionResult>
+public sealed class ConvertUnitCommandHandler : ICommandHandler<ConvertUnitCommand, ConversionResult>
 {
-    public Task<ConversionResult> Handle(ConvertUnitCommand request, CancellationToken cancellationToken)
+    private readonly IUnitRepository _unitRepository;
+    private readonly IConversionStrategyFactory _strategyFactory;
+
+    public ConvertUnitCommandHandler(
+        IUnitRepository unitRepository,
+        IConversionStrategyFactory strategyFactory)
     {
-        throw new NotImplementedException("Conversion logic will be added in a later commit.");
+        _unitRepository = unitRepository;
+        _strategyFactory = strategyFactory;
+    }
+
+    public async Task<ConversionResult> Handle(ConvertUnitCommand command, CancellationToken cancellationToken)
+    {
+        var fromUnit = await _unitRepository.GetByCodeAsync(command.FromUnit, cancellationToken)
+            ?? throw new UnitNotFoundException(command.FromUnit);
+
+        var toUnit = await _unitRepository.GetByCodeAsync(command.ToUnit, cancellationToken)
+            ?? throw new UnitNotFoundException(command.ToUnit);
+
+        if (fromUnit.Category != toUnit.Category)
+        {
+            throw new IncompatibleUnitCategoryException(fromUnit.Code, toUnit.Code);
+        }
+
+        var strategy = _strategyFactory.GetStrategy(fromUnit.Category);
+        return strategy.Convert(command.Value, fromUnit, toUnit);
     }
 }

@@ -1,6 +1,6 @@
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UnitConversion.Api.Contracts;
+using UnitConversion.Application.Abstractions;
 using UnitConversion.Application.Commands.ConvertUnit;
 using UnitConversion.Domain.Models;
 
@@ -10,11 +10,11 @@ namespace UnitConversion.Api.Controllers;
 [Route("api/convert")]
 public sealed class ConversionsController : ControllerBase
 {
-    private readonly IMediator _mediator;
+    private readonly ICommandHandler<ConvertUnitCommand, ConversionResult> _handler;
 
-    public ConversionsController(IMediator mediator)
+    public ConversionsController(ICommandHandler<ConvertUnitCommand, ConversionResult> handler)
     {
-        _mediator = mediator;
+        _handler = handler;
     }
 
     /// <summary>
@@ -23,11 +23,12 @@ public sealed class ConversionsController : ControllerBase
     /// </summary>
     [HttpPost]
     [ProducesResponseType(typeof(ConversionResult), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<ConversionResult>> Convert(
         [FromBody] ConvertUnitRequest request,
         CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(
+        var result = await _handler.Handle(
             new ConvertUnitCommand(request.Value, request.FromUnit, request.ToUnit),
             cancellationToken);
 

@@ -1,7 +1,10 @@
 using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using UnitConversion.Application.Abstractions;
+using UnitConversion.Application.Commands.ConvertUnit;
+using UnitConversion.Application.Queries.GetUnits;
+using UnitConversion.Domain.Models;
 
 namespace UnitConversion.Application;
 
@@ -11,8 +14,10 @@ public static class DependencyInjection
     {
         var assembly = Assembly.GetExecutingAssembly();
 
-        services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(assembly));
         services.AddValidatorsFromAssembly(assembly);
+
+        services.AddScoped<IQueryHandler<GetUnitsQuery, IReadOnlyList<UnitDefinition>>, GetUnitsQueryHandler>();
+        services.AddScoped<ICommandHandler<ConvertUnitCommand, ConversionResult>, ConvertUnitCommandHandler>();
 
         return services;
     }

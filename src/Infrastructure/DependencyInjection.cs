@@ -11,6 +11,11 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         services.AddSingleton<IUnitRepository, InMemoryUnitRepository>();
+
+        services.AddSingleton<IConversionStrategy, LengthConversionStrategy>();
+        services.AddSingleton<IConversionStrategy, WeightConversionStrategy>();
+        services.AddSingleton<IConversionStrategy, TemperatureConversionStrategy>();
+        services.AddSingleton<IConversionStrategy, VolumeConversionStrategy>();
         services.AddSingleton<IConversionStrategyFactory, ConversionStrategyFactory>();
 
         return services;

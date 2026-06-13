@@ -1,11 +1,11 @@
-using MediatR;
+using UnitConversion.Application.Abstractions;
 using UnitConversion.Domain.Enums;
 using UnitConversion.Domain.Models;
 using UnitConversion.Domain.Registry;
 
 namespace UnitConversion.Application.Queries.GetUnits;
 
-public sealed class GetUnitsQueryHandler : IRequestHandler<GetUnitsQuery, IReadOnlyList<UnitDefinition>>
+public sealed class GetUnitsQueryHandler : IQueryHandler<GetUnitsQuery, IReadOnlyList<UnitDefinition>>
 {
     private readonly IUnitRepository _unitRepository;
 
@@ -14,9 +14,9 @@ public sealed class GetUnitsQueryHandler : IRequestHandler<GetUnitsQuery, IReadO
         _unitRepository = unitRepository;
     }
 
-    public async Task<IReadOnlyList<UnitDefinition>> Handle(GetUnitsQuery request, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<UnitDefinition>> Handle(GetUnitsQuery query, CancellationToken cancellationToken)
     {
-        if (request.Category is ConversionCategory category)
+        if (query.Category is ConversionCategory category)
         {
             return await _unitRepository.GetByCategoryAsync(category, cancellationToken);
         }

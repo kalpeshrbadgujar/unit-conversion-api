@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text.Json.Serialization;
+using UnitConversion.Api.Middleware;
 using UnitConversion.Api.Swagger;
 using UnitConversion.Application;
 using UnitConversion.Infrastructure;
@@ -28,6 +29,8 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseSwagger();
 app.UseSwaggerUI();
