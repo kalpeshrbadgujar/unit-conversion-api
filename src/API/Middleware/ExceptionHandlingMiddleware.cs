@@ -29,14 +29,33 @@ public sealed class ExceptionHandlingMiddleware
         }
         catch (ValidationException ex)
         {
+            _logger.LogWarning(
+                "Validation failed for {Method} {Path} with {ValidationErrorCount} errors",
+                context.Request.Method,
+                context.Request.Path,
+                ex.Errors.Count());
+
             await WriteValidationErrorAsync(context, ex);
         }
         catch (UnitNotFoundException ex)
         {
+            _logger.LogWarning(
+                "Unit not found for {Method} {Path}: {UnitCode}",
+                context.Request.Method,
+                context.Request.Path,
+                ex.UnitCode);
+
             await WriteErrorAsync(context, HttpStatusCode.BadRequest, ex.Message);
         }
         catch (IncompatibleUnitCategoryException ex)
         {
+            _logger.LogWarning(
+                "Incompatible units for {Method} {Path}: {FromUnit} -> {ToUnit}",
+                context.Request.Method,
+                context.Request.Path,
+                ex.FromUnit,
+                ex.ToUnit);
+
             await WriteErrorAsync(context, HttpStatusCode.BadRequest, ex.Message);
         }
         catch (Exception ex)
