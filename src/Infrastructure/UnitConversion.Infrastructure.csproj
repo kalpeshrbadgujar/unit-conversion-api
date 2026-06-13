@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <AssemblyName>UnitConversion.Infrastructure</AssemblyName>
@@ -8,6 +8,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Core\Domain\UnitConversion.Domain.csproj" />
     <ProjectReference Include="..\Core\Common\UnitConversion.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.6" />
   </ItemGroup>
 
 </Project>
