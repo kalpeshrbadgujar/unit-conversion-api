@@ -15,5 +15,10 @@ public sealed class LengthConversionStrategy : LinearConversionStrategyBase
             ["meter"] = 1m,
             ["kilometer"] = 1000m,
             ["foot"] = 0.3048m,
+            ["yard"] = 0.9144m,
+            ["mile"] = 1609.344m,
+            ["millimeter"] = 0.001m,
+            ["centimeter"] = 0.01m,
+            ["inch"] = 0.0254m
         };
 }

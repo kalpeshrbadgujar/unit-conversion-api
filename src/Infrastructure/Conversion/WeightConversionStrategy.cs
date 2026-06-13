@@ -1,4 +1,3 @@
-using UnitConversion.Domain.Conversion;
 using UnitConversion.Domain.Enums;
 
 namespace UnitConversion.Infrastructure.Conversion;
@@ -15,5 +14,8 @@ public sealed class WeightConversionStrategy : LinearConversionStrategyBase
         {
             ["kilogram"] = 1m,
             ["pound"] = 0.45359237m,
+            ["tonne"] = 1000m,
+            ["gram"] = 0.001m,
+            ["ounce"] = 0.028349523125m,
         };
 }
