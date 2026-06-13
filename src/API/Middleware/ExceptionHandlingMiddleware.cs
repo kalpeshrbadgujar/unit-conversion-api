@@ -1,5 +1,6 @@
 using System.Net;
 using System.Text.Json;
+using FluentValidation;
 using UnitConversion.Domain.Exceptions;
 
 namespace UnitConversion.Api.Middleware;
@@ -26,6 +27,10 @@ public sealed class ExceptionHandlingMiddleware
         {
             await _next(context);
         }
+        catch (ValidationException ex)
+        {
+            await WriteValidationErrorAsync(context, ex);
+        }
         catch (UnitNotFoundException ex)
         {
             await WriteErrorAsync(context, HttpStatusCode.BadRequest, ex.Message);
@@ -39,6 +44,24 @@ public sealed class ExceptionHandlingMiddleware
             _logger.LogError(ex, "Unhandled exception processing {Method} {Path}", context.Request.Method, context.Request.Path);
             await WriteErrorAsync(context, HttpStatusCode.InternalServerError, "An unexpected error occurred.");
         }
+    }
+
+    private static async Task WriteValidationErrorAsync(HttpContext context, ValidationException exception)
+    {
+        context.Response.StatusCode = StatusCodes.Status400BadRequest;
+        context.Response.ContentType = "application/json";
+
+        var payload = JsonSerializer.Serialize(new
+        {
+            message = "Validation failed.",
+            errors = exception.Errors.Select(error => new
+            {
+                propertyName = error.PropertyName,
+                errorMessage = error.ErrorMessage,
+            }),
+        }, JsonOptions);
+
+        await context.Response.WriteAsync(payload);
     }
 
     private static async Task WriteErrorAsync(HttpContext context, HttpStatusCode statusCode, string message)
