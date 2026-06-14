@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UnitConversion.Application.Abstractions;
 using UnitConversion.Application.Queries.GetUnits;
@@ -7,6 +8,7 @@ using UnitConversion.Domain.Models;
 namespace UnitConversion.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/units")]
 public sealed class UnitsController : ControllerBase
 {

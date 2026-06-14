@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UnitConversion.Api.Contracts;
 using UnitConversion.Application.Abstractions;
@@ -7,6 +8,7 @@ using UnitConversion.Domain.Models;
 namespace UnitConversion.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/convert")]
 public sealed class ConversionsController : ControllerBase
 {

@@ -58,3 +58,5 @@ nunit-*.xml
 /.vs
 /src/API/Api.csproj.user
 /src/API/UnitConversion.Api.csproj.user
+/src/API/Properties/PublishProfiles
+/src/API/Properties/ServiceDependencies/unit-conversion - Web Deploy/profile.arm.json

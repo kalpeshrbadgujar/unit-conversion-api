@@ -1,6 +1,7 @@
 using FluentValidation;
+using UnitConversion.Application.Commands.ConvertUnit;
 
-namespace UnitConversion.Application.Commands.ConvertUnit;
+namespace UnitConversion.Application.Validators;
 
 public sealed class ConvertUnitCommandValidator : AbstractValidator<ConvertUnitCommand>
 {
