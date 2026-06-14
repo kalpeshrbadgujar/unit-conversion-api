@@ -9,10 +9,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Application\UnitConversion.Application.csproj" />
+    <ProjectReference Include="..\Core\Common\UnitConversion.Common.csproj" />
     <ProjectReference Include="..\Infrastructure\UnitConversion.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.6" />
     <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
     <PackageReference Include="Serilog.Formatting.Compact" Version="3.0.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.0" />

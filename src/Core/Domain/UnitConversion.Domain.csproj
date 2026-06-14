@@ -5,4 +5,8 @@
     <RootNamespace>UnitConversion.Domain</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Common\UnitConversion.Common.csproj" />
+  </ItemGroup>
+
 </Project>

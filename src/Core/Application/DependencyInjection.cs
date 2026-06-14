@@ -2,7 +2,10 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using UnitConversion.Application.Abstractions;
+using UnitConversion.Application.Services;
+using UnitConversion.Application.Services.Grants;
 using UnitConversion.Application.Behaviors;
+using UnitConversion.Application.Commands.AuthenticateUser;
 using UnitConversion.Application.Commands.ConvertUnit;
 using UnitConversion.Application.Queries.GetUnits;
 using UnitConversion.Domain.Models;
@@ -15,8 +18,13 @@ public static class DependencyInjection
     {
         services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
 
+        services.AddSingleton<IGrantAuthService, PasswordGrantAuthService>();
+        services.AddSingleton<IGrantAuthServiceProvider, GrantAuthServiceProvider>();
+        services.AddScoped<IAuthService, AuthService>();
+
         services.AddLoggedQueryHandler<GetUnitsQuery, IReadOnlyList<UnitDefinition>, GetUnitsQueryHandler>();
         services.AddLoggedValidatedCommandHandler<ConvertUnitCommand, ConversionResult, ConvertUnitCommandHandler>();
+        services.AddLoggedValidatedCommandHandler<AuthenticateUserCommand, AuthenticateUserResult, AuthenticateUserCommandHandler>();
 
         return services;
     }

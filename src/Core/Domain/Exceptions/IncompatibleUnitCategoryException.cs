@@ -1,9 +1,11 @@
+using UnitConversion.Common.Constants;
+
 namespace UnitConversion.Domain.Exceptions;
 
 public sealed class IncompatibleUnitCategoryException : Exception
 {
     public IncompatibleUnitCategoryException(string fromUnit, string toUnit)
-        : base($"Cannot convert between '{fromUnit}' and '{toUnit}' because they belong to different categories.")
+        : base(ConversionMessages.IncompatibleCategories(fromUnit, toUnit))
     {
         FromUnit = fromUnit;
         ToUnit = toUnit;

@@ -1,4 +1,6 @@
 using UnitConversion.Application.Commands.ConvertUnit;
+using UnitConversion.Application.Validators;
+using UnitConversion.Common.Constants;
 
 namespace UnitConversion.Tests.Commands;
 
@@ -26,6 +28,6 @@ public sealed class ConvertUnitCommandValidatorTests
 
         Assert.False(result.IsValid);
         Assert.Contains(result.Errors, error =>
-            error.ErrorMessage == "Source and target units must be different.");
+            error.ErrorMessage == ConversionMessages.UnitsMustDiffer);
     }
 }
