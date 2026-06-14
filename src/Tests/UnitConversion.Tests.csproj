@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core\Common\UnitConversion.Common.csproj" />
     <ProjectReference Include="..\Core\Domain\UnitConversion.Domain.csproj" />
     <ProjectReference Include="..\Core\Application\UnitConversion.Application.csproj" />
     <ProjectReference Include="..\Infrastructure\UnitConversion.Infrastructure.csproj" />

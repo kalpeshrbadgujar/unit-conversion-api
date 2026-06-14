@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Application\UnitConversion.Application.csproj" />
+    <ProjectReference Include="..\Core\Common\UnitConversion.Common.csproj" />
     <ProjectReference Include="..\Infrastructure\UnitConversion.Infrastructure.csproj" />
   </ItemGroup>
 

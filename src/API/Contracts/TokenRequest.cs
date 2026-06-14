@@ -1,4 +1,4 @@
-using UnitConversion.Application.Commands.AuthenticateUser;
+using UnitConversion.Common.Enums;
 
 namespace UnitConversion.Api.Contracts;
 

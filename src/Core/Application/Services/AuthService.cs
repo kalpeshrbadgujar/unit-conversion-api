@@ -1,6 +1,7 @@
 using System.Net;
 using UnitConversion.Application.Commands.AuthenticateUser;
 using UnitConversion.Application.Services.Grants;
+using UnitConversion.Common.Constants;
 
 namespace UnitConversion.Application.Services;
 
@@ -26,7 +27,7 @@ public sealed class AuthService : IAuthService
             return new AuthenticateUserResult
             {
                 StatusCode = HttpStatusCode.NotImplemented,
-                Message = $"{command.GrantType} grant is not supported yet.",
+                Message = AuthMessages.GrantNotSupportedYet(command.GrantType),
             };
         }
 

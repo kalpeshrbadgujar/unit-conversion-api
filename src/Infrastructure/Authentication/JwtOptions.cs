@@ -1,8 +1,10 @@
+using UnitConversion.Common.Constants;
+
 namespace UnitConversion.Infrastructure.Authentication;
 
 public sealed class JwtOptions
 {
-    public const string SectionName = "Authentication:Jwt";
+    public const string SectionName = ConfigurationSections.AuthenticationJwt;
 
     public string Issuer { get; init; } = "UnitConversion.Api";
 

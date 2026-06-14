@@ -1,3 +1,5 @@
+using UnitConversion.Common.Enums;
+
 namespace UnitConversion.Application.Commands.AuthenticateUser;
 
 public sealed record AuthenticateUserCommand(

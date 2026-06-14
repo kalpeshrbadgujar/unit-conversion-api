@@ -1,5 +1,7 @@
 using System.Net;
 using UnitConversion.Application.Commands.AuthenticateUser;
+using UnitConversion.Common.Constants;
+using UnitConversion.Common.Enums;
 using UnitConversion.Domain.Auth;
 
 namespace UnitConversion.Application.Services.Grants;
@@ -36,7 +38,7 @@ public sealed class PasswordGrantAuthService : IGrantAuthService
             return new AuthenticateUserResult
             {
                 StatusCode = HttpStatusCode.Unauthorized,
-                Message = "Invalid username or password.",
+                Message = AuthMessages.InvalidCredentials,
             };
         }
 

@@ -1,5 +1,7 @@
 using FluentValidation;
 using UnitConversion.Application.Commands.AuthenticateUser;
+using UnitConversion.Common.Constants;
+using UnitConversion.Common.Enums;
 
 namespace UnitConversion.Application.Validators;
 
@@ -14,11 +16,11 @@ public sealed class AuthenticateUserCommandValidator : AbstractValidator<Authent
         {
             RuleFor(command => command.Username)
                 .NotEmpty()
-                .MaximumLength(50);
+                .MaximumLength(ValidationLimits.UsernameMaxLength);
 
             RuleFor(command => command.Password)
                 .NotEmpty()
-                .MaximumLength(100);
+                .MaximumLength(ValidationLimits.PasswordMaxLength);
         });
     }
 }
