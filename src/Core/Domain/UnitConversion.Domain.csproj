@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>UnitConversion.Domain</AssemblyName>
+    <RootNamespace>UnitConversion.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\UnitConversion.Common.csproj" />
+  </ItemGroup>
+
+</Project>
